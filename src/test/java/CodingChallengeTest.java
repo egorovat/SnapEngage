@@ -1,16 +1,15 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
@@ -20,13 +19,13 @@ public class CodingChallengeTest {
 
     private WebDriver driver;
 
-    @Before
+    @BeforeTest
     public void SetUp() {
         System.setProperty("webdriver.chrome.driver","target/test-classes/drivers/chromedriver");
         driver = new ChromeDriver();
     }
 
-    @After
+    @AfterTest
     public void CleanUp() {
         driver.close();
     }
