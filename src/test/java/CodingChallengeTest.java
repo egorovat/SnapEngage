@@ -45,6 +45,12 @@ public class CodingChallengeTest {
         String greeting = driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).getText();
         Assert.assertTrue(greeting.contains("Pedro Almodovar!"));
 
+        this.TakeScreenshot(driver);
+
+    }
+
+    public void TakeScreenshot(WebDriver driver){
+
         driver.manage().window().maximize();
 
         byte [] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
