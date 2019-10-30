@@ -32,6 +32,7 @@ public class CodingChallengeTest {
 
     @Test
     public void Login() {
+
         driver.get("https://snapengage-qa.appspot.com/signin?to=hub");
 
         driver.findElement(By.id("email")).sendKeys("pedroalmodovar@test.com");
@@ -39,7 +40,6 @@ public class CodingChallengeTest {
         driver.findElement(By.name("Submit")).click();
 
         Wait wait = new WebDriverWait(driver,5);
-
         wait.until(d -> driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).isDisplayed());
 
         String greeting = driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).getText();
