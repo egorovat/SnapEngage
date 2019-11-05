@@ -36,20 +36,22 @@ public class CodingChallengeTest {
         driver.get("https://snapengage-qa.appspot.com/signin?to=hub");
 
         driver.findElement(By.id("email")).sendKeys("pedroalmodovar@test.com");
-        driver.findElement(By.id("password")).sendKeys("1q2w3e");
+        driver.findElement(By.id("password")).sendKeys("1q2w3e0");
         driver.findElement(By.name("Submit")).click();
 
         Wait wait = new WebDriverWait(driver,5);
-        wait.until(d -> driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).isDisplayed());
-
-        String greeting = driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).getText();
-        Assert.assertTrue(greeting.contains("Pedro Almodovar!"));
-
-        this.TakeScreenshot(driver);
-
+        try {
+            wait.until(d -> driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).isDisplayed());
+            String greeting = driver.findElement(By.xpath("//div[@id='intro-box']/div[contains(@class,'StyledGreeting')]")).getText();
+            Assert.assertTrue(greeting.contains("Pedro Almodovar!"));
+        } catch (Exception e) {
+            this.TakeScreenshot(driver, "fail");
+            e.printStackTrace();
+        }
+        this.TakeScreenshot(driver, "pass");
     }
 
-    public void TakeScreenshot(WebDriver driver){
+    public void TakeScreenshot(WebDriver driver, String result){
 
         driver.manage().window().maximize();
 
@@ -57,7 +59,7 @@ public class CodingChallengeTest {
 
         try {
             LocalDateTime now = LocalDateTime.now();
-            Files.write(Paths.get("./screens/screenshot_" + now.format(DateTimeFormatter.ISO_DATE_TIME) + ".jpg"),
+            Files.write(Paths.get("./screens/screenshot_" + result + "_" + now.format(DateTimeFormatter.ISO_DATE_TIME) + ".jpg"),
                     screenshot, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
         } catch (IOException e) {
             e.printStackTrace();
