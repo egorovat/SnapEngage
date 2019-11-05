@@ -36,7 +36,7 @@ public class CodingChallengeTest {
         driver.get("https://snapengage-qa.appspot.com/signin?to=hub");
 
         driver.findElement(By.id("email")).sendKeys("pedroalmodovar@test.com");
-        driver.findElement(By.id("password")).sendKeys("1q2w3e0");
+        driver.findElement(By.id("password")).sendKeys("1q2w3e");
         driver.findElement(By.name("Submit")).click();
 
         Wait wait = new WebDriverWait(driver,5);
@@ -46,7 +46,7 @@ public class CodingChallengeTest {
             Assert.assertTrue(greeting.contains("Pedro Almodovar!"));
         } catch (Exception e) {
             this.TakeScreenshot(driver, "fail");
-            e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
         this.TakeScreenshot(driver, "pass");
     }
